@@ -14,7 +14,7 @@
    * Using adb:
       ```
 {%- for partition in device.before_recovery_install.partitions %}
-      adb -d push {{ partition }}.img /sdcard/{{ partition }}.img
+      adb -d push {{ partition }}.img /sdcard/{{ device.partition_path }}{{ partition }}.img
 {%- endfor %}
       ```
    * You can use any method you are comfortable with. `adb` is universal across all devices, and works both in Android and recovery mode, providing USB debugging is enabled.
@@ -23,15 +23,15 @@
 ```
 su
 {%- for partition in device.before_recovery_install.partitions %}
-dd if=/sdcard/{{ partition }}.img of={{ partition }}_a
-dd if=/sdcard/{{ partition }}.img of={{ partition }}_b
+dd if=/sdcard/{{ partition }}.img of={{ device.partition_path }}{{ partition }}_a
+dd if=/sdcard/{{ partition }}.img of={{ device.partition_path }}{{ partition }}_b
 {%- endfor %}
 ```
 {%- else %}
 ```
 su
 {%- for partition in device.before_recovery_install.partitions %}
-dd if=/sdcard/{{ partition }}.img of={{ partition }}
+dd if=/sdcard/{{ partition }}.img of={{ device.partition_path }}{{ partition }}
 {%- endfor %}
 ```
 {%- endif %}

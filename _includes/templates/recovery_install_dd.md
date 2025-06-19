@@ -39,13 +39,13 @@
 {%- if device.is_ab_device %}
 ```
 su
-dd if=/sdcard/<recovery_filename>.img of={{ device.recovery_partition }}_a
-dd if=/sdcard/<recovery_filename>.img of={{ device.recovery_partition }}_b
+dd if=/sdcard/<recovery_filename>.img of={{ device.partition_path }}{{ device.recovery_partition }}_a
+dd if=/sdcard/<recovery_filename>.img of={{ device.partition_path }}{{ device.recovery_partition }}_b
 ```
 {%- else %}
 ```
 su
-dd if=/sdcard/<recovery_filename>.img of={{ device.recovery_partition }}
+dd if=/sdcard/<recovery_filename>.img of={{ device.partition_path }}{{ device.recovery_partition }}
 ```
 {%- endif %}
 4. Reboot into recovery.
